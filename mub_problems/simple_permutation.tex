@@ -1,0 +1,61 @@
+\NewDocumentCommand{\ceil}{s O{} m}{%
+	\IfBooleanTF{#1} % starred
+	{\left\lceil#3\right\rceil} % \ceil*[..]{..}
+	{#2\lceil#3#2\rceil} % \ceil[..]{..}
+}
+
+\NewDocumentCommand{\floor}{s O{} m}{%
+	\IfBooleanTF{#1} % starred
+	{\left\lfloor#3\right\rfloor} % \floor*[..]{..}
+	{#2\lfloor#3#2\rfloor} % \floor[..]{..}
+}
+
+\begin{frame}{Simple Permutation}
+	\framesubtitle{Codeforces 2089A}
+	\begin{itemize}
+		\item<1-> Given an integer $n$. Construct a permutation $p_1, p_2, \ldots, p_n$ that follows the following rules:
+		\item<2-> Define $c_i = \ceil{\frac{p_1 + p_2 + \ldots + p_i}{i}}$.
+		\item<3-> Then among $c_1, c_2, \ldots, c_n$, there are must be atleast $\floor{\frac{n}{3}} - 1$ prime numbers.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Simple Permutation}
+	\framesubtitle{Codeforces 2089A}
+	\begin{block}{Sample Input}
+		5 \\
+	\end{block}
+	\begin{block}{Sample Output}
+		2 1 3 4 5
+	\end{block}
+\end{frame}
+
+\begin{frame}{Simple Permutation}
+	\framesubtitle{Codeforces 2089A}
+	\begin{block}{Sample Input}
+		6 \\
+	\end{block}
+	\begin{block}{Sample Output}
+		3 2 1 4 5 6
+	\end{block}
+\end{frame}
+
+\begin{frame}{Simple Permutation}
+	\framesubtitle{Codeforces 2089A}
+	\textbf{Hint - Bertrand's Postulate:} \\
+	For each positive integer $x \geq 1$, there exists at least one prime $p$ such that $x < p < 2x$.
+\end{frame}
+
+\begin{frame}{Simple Permutation}
+	\framesubtitle{Codeforces 2089A}
+	\textbf{Solution:} \\
+	\begin{itemize}
+		\item <1-> Choose a prime number $p$ between $\floor{\frac{n}{3}}$ and $\ceil{\frac{2n}{3}}$.
+		\item <2-> Construct the permutation as follows:
+		      \begin{align*}
+			      p, p - 1, p + 1, p - 2, p + 2, \ldots \\
+		      \end{align*}
+		      \text{ then fill the remaining numbers in any order.}
+		\item <3-> In this way, we have $c_1 = c_3 = c_5 = \ldots = c_{2 \floor{\frac{n}{3}} - 1} = p$
+	\end{itemize}
+\end{frame}
+

@@ -1,0 +1,64 @@
+\begin{frame}{Problem about GCD}
+	\framesubtitle{Codeforces 2043D}
+	\begin{itemize}
+		\item <1-> Given three integers $l$, $r$, and $G$.
+		\item <2-> Find two integers $A$ and $B$ such that:
+		      \begin{align*}
+			       & l \leq A \leq B \leq r         \\
+			       & \gcd(A, B) = G                 \\
+			       & | A - B| \text{ is maximized.}
+		      \end{align*}
+		      If there are multiple such pairs, output the one with the smallest $A$. \\
+		      If there is no such pair, output -1 -1.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Problem about GCD}
+	\framesubtitle{Codeforces 2043D}
+	\begin{block}{Sample Input}
+		4 12 2
+	\end{block}
+	\begin{block}{Sample Output}
+		4 10
+	\end{block}
+\end{frame}
+
+\begin{frame}{Problem about GCD}
+	\framesubtitle{Codeforces 2043D}
+	\begin{block}{Sample Input}
+		4 8 3
+	\end{block}
+	\begin{block}{Sample Output}
+		-1 -1
+	\end{block}
+\end{frame}
+
+\begin{frame}{Problem about GCD}
+	\framesubtitle{Codeforces 2043D}
+	\textbf{Try solving if $G = 1$} \\
+	\begin{itemize}
+		\item <1-> We will try $A = l$ and $B = r$. If $\gcd(A, B) = 1$, we found our answer.
+		\item <2-> Then we will try $A = l$ and $B = r - 1$, and then $A = l + 1$ and $B = r$.
+		\item <3-> Then, we will try $(l, r - 2), (l + 1, r - 1), (l + 2, r)$ and so on.
+		\item <4-> We will keep trying until we find a pair $(A, B)$ such that $\gcd(A, B) = 1$.
+		\item <5-> If $A > B$, we will stop (There is no solution).
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Problem about GCD}
+	\framesubtitle{Codeforces 2043D}
+	\begin{center}
+		\textbf{But that seems slow?} \\
+	\end{center}
+\end{frame}
+
+
+\begin{frame}{Problem about GCD}
+	\framesubtitle{Codeforces 2043D}
+	\begin{theorem}<1->
+		The algorithm will find atleast one pair of coprime pair between $[l, l + 30)$ and $(r - 30, r]$.
+	\end{theorem}
+
+	\begin{proof}<2->
+	\end{proof}
+\end{frame}

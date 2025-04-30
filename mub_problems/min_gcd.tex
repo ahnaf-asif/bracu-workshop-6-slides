@@ -1,0 +1,59 @@
+\begin{frame}{Min = GCD}
+	\framesubtitle{Codeforces 2084B}
+	\begin{itemize}
+		\item<1-> Given an array $a$ of length $n$.
+		\item<2-> You can rearrange $a$ in any order.
+		\item<3-> Determine if there is an arrangement of $a$ such that there exists an integer $i (1 \leq i \leq n)$ such that
+		      \begin{align*}
+			      \min([a_1, a_2, \ldots, a_i]) = \gcd([a_{i+1}, a_{i+2}, \ldots, a_n])
+		      \end{align*}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Min = GCD}
+	\framesubtitle{Codeforces 2084B}
+	\begin{block}{Sample Input}
+		3 \\
+		2 2 3
+	\end{block}
+	\begin{block}{Sample Output}
+		YES
+	\end{block}
+\end{frame}
+
+\begin{frame}{Min = GCD}
+	\framesubtitle{Codeforces 2084B}
+	\begin{block}{Sample Input}
+		3 \\
+		2 4 3
+	\end{block}
+	\begin{block}{Sample Output}
+		NO
+	\end{block}
+\end{frame}
+
+\begin{frame}{Min = GCD}
+	\framesubtitle{Codeforces 2084B}
+	\begin{block}{Sample Input}
+		5 \\
+		3 4 6 9 6
+	\end{block}
+	\begin{block}{Sample Output}
+		YES
+	\end{block}
+\end{frame}
+
+\begin{frame}{Min = GCD}
+	\framesubtitle{Codeforces 2084B}
+	\textbf{Observation:} \\
+	\begin{itemize}
+		\item <1-> We need to divide the array into two parts, and determine which number goes where.
+		\item <2-> $\gcd{(a)} \leq \min{(a)}$.
+		\item <3-> The minimum number must be in the first part lets call it $mn$
+		\item <4-> The second part must consists only multiples of $mn$.
+		\item <5-> The second part should contain all multiples of $mn$.
+		\item <6-> Hence, the answer is YES if gcd all multiples of $mn$ (except $mn$ itself) equals to $mn$. Otherwise NO.
+	\end{itemize}
+\end{frame}
+
+
