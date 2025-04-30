@@ -1,0 +1,213 @@
+\documentclass{beamer}
+\usepackage{listings}
+\usepackage{minted}
+\usepackage{hyperref}
+\usepackage{blindtext}
+\usepackage{graphicx}
+\usepackage{tikz-cd}
+\usepackage{animate}
+\usepackage{xparse}
+
+\newcommand\dsuml{\sum\limits}
+
+\title{BRACU CP Workshop}
+\subtitle{Day 5}
+\author{
+    Ahnaf Shahriar Asif\\
+    Md Mubasshir Chowdhury
+}
+
+\institute{BRAC University, Dhaka}
+
+\date{30 April 2025}
+
+\begin{document}
+
+\frame{\titlepage}
+% Add the Table of Contents on the second slide
+\begin{frame}
+  \frametitle{Table of Contents}
+  \tableofcontents
+\end{frame}
+
+\section{Introduction}
+\begin{frame}{What will we learn ?}
+\begin{itemize}
+    \item<1-> Divisibility  
+    \item<2-> Primes
+    \item<3-> Modular Arithmetic
+    \item<4-> Primality testing
+    \item<5-> Number theoretic functions
+\end{itemize}
+\end{frame}
+
+\section{Divisibility}
+\begin{frame}{Divisibility}
+\begin{itemize}
+  \item<1-> Let \(a\), \(b\), and \(c\) be integers. Then:
+  \begin{enumerate}[(i)]
+    \item If \(b \mid a\) and \(c \mid a\), then \(bc \mid a\).
+    \item If \(b \mid a\) and \(c \mid b\), then \(c \mid a\).
+    \item If \(b \mid a\) and \(c \mid b\), then \(bc \mid ab\).
+    \item If \(c \mid a\) and \(c \mid b\), then \(c \mid (a + b)\) and \(c \mid (a - b)\).
+  \end{enumerate}
+\end{itemize}
+\end{frame}
+
+\section{Finding divisors of n}
+\begin{frame}{Finding divisors of n}
+\begin{itemize}
+  \item<1-> We can loop through all numbers and see if they divide \(n\). 
+  \item<2-> Looping till $\sqrt{n}$ is enough.
+  \item<3-> We can find divisors of all numbers upto $n$ in $\mathcal{O}(n \ln(n))$ time.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Code}
+  \frametitle{Finding divisors of n}
+  \begin{itemize}
+    \begin{minted}{cpp}
+vector<vector<int>> divisors(n + 1);
+for (int i = 1; i <= n; i++) {
+    for (int j = i; j <= n; j += i) {
+        divisors[j].push_back(i);
+    }
+}
+\end{minted}
+
+  \end{itemize}
+\end{frame}
+
+\section{Primes}
+\begin{frame}[fragile]{Primes}
+  \begin{itemize}
+    \item<1-> A prime $p$ is greater than 1 and only divisible by 1 and $p$.
+    \item<2-> A composite number is a positive integer that is not prime.
+    \item<3-> Prime numbers help us calculate a lot of things easily.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Find number of divisors of $n$}
+  \begin{itemize}
+    \item<1-> Given an integer $1 \leq n \leq 10^9$, find the number of divisors of $n$.
+  \end{itemize}
+\end{frame}
+\begin{frame}[fragile]{Solution}
+  \frametitle{Solution: Number of divisors}
+  \begin{itemize}
+    \item<1-> We can find the prime factorization of $n$.
+    \item<2-> If $n = p_1^{e_1} \cdot p_2^{e_2} \cdots p_k^{e_k}$, then the number of divisors of $n$ is given by:
+    \[
+      d(n) = (e_1 + 1)(e_2 + 1) \cdots (e_k + 1)
+    \]
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Prime Factorization}
+  \frametitle{Prime Factorization}
+  \begin{itemize}
+    \item<1-> We can find the prime factorization of $n$ in $\mathcal{O}(\sqrt{n})$ time.
+    \item<2-> We can use a \textbf{sieve} to find all primes up to $10^6$ in $\mathcal{O}(n \log(\log(n)))$ time.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Code}
+  \frametitle{Prime Factorization code}
+  \begin{minted}{cpp}
+  // vector<int> primes; (contains all primes upto sqrt(n))
+  vector<pair<int,int>> ppf(int n){
+    vector<pair<int,int>> factors;
+    for (int i = 0; primes[i] * primes[i] <= n; i++){
+      int cnt = 0;
+      while (n % primes[i] == 0){
+        n /= primes[i];
+        cnt++;
+      }
+      if (cnt > 0) factors.push_back({primes[i], cnt});
+    }
+    if (n > 1) factors.push_back({n, 1});
+    return factors;
+  }
+  // if n = 12, it will return:
+  // {{2, 2}, {3, 1}} which means 12 = 2^2 * 3^1 
+  \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{Sieve}
+  \frametitle{Sieve}
+  \begin{itemize}
+    \item<1-> We can use a sieve to find all primes up to $10^6$ in $\mathcal{O}(n \log(\log(n)))$ time.
+    \item<2-> We can use the sieve to find the smallest prime factor of each number.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Sieve Simulation}
+  \frametitle{Sieve Simulation}
+  
+\begin{center}
+\begin{tabular}{|*{10}{c|}}
+\hline
+1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
+\hline
+11 & 12 & 13 & 14 & 15 & 16 & 17 & 18 & 19 & 20 \\
+\hline
+21 & 22 & 23 & 24 & 25 & 26 & 27 & 28 & 29 & 30 \\
+\hline
+31 & 32 & 33 & 34 & 35 & 36 & 37 & 38 & 39 & 40 \\
+\hline
+\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Code}
+  \frametitle{Sieve Code}
+  \begin{minted}{cpp}
+  bool is_composite[N];
+  vector<int> primes;
+
+  void sieve(int n){
+    is_composite[1] = true;
+    for(int i = 2; i <= n;i++){
+      if(!is_composite[i]){
+        primes.push_back(i);
+        for(int j = i * i; j <= n;j+=i){
+          is_composite[j] = true;
+        }
+      }
+    }
+  }
+\end{minted}
+\end{frame}
+
+
+
+\section{Problem solving}
+\begin{frame}{Boxes Packing}
+\framesubtitle{Codeforces 903C}
+\begin{itemize}
+    \item<1-> You have $n$ cube-shaped boxes, each with side length $a_i$
+    \item<2-> You can put box $i$ into box $j$ if $a_i < a_j$, box $i$ is not already inside another box, and box $j$ is empty
+    \item<3-> Boxes can be nested multiple times
+    \item<4-> A box is \emph{visible} if it is not inside any other box. Your goal is to minimize the number of visible boxes
+    \item<5-> \textbf{Input:} one integer $n$ ($1 \leq n \leq 5000$), followed by a list of $n$ integers $a_1$ to $a_n$ ($1 \leq a_i \leq 10^9$)
+    \item<6-> \textbf{Output:} the minimum number of visible boxes
+\end{itemize}
+\end{frame}
+
+\begin{frame}{}
+\framesubtitle{}
+\begin{itemize}
+    \item<1-> \begin{center}
+        \large{Good Bye!}
+    \end{center}
+\end{itemize}
+
+\end{frame}
+
+\end{document}
+
+
+
+
+

@@ -1,0 +1,5 @@
+\beamer@sectionintoc {1}{Introduction}{3}{0}{1}
+\beamer@sectionintoc {2}{Divisibility}{8}{0}{2}
+\beamer@sectionintoc {3}{Finding divisors of n}{9}{0}{3}
+\beamer@sectionintoc {4}{Primes}{13}{0}{4}
+\beamer@sectionintoc {5}{Problem solving}{26}{0}{5}
