@@ -2,3 +2,4 @@ build/
 aux/
 aux-dir/
 out-dir/
+.DS_Store
