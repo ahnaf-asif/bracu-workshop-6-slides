@@ -1,7 +1,7 @@
 \begin{frame}{Problem about GCD}
 	\framesubtitle{Codeforces 2043D}
 	\begin{itemize}
-		\item <1-> Given three integers $l$, $r$, and $G$.
+        \item <1-> Given three integers $l$, $r$, and $G$. ($1 \leq l leq r \leq 10^{18}$, $1 \leq G \leq 10^18$)
 		\item <2-> Find two integers $A$ and $B$ such that:
 		      \begin{align*}
 			       & l \leq A \leq B \leq r         \\
@@ -60,5 +60,32 @@
 	\end{theorem}
 
 	\begin{proof}<2->
-	\end{proof}
+        There are 900 pairs to be considered. \\ \pause
+        If a pair is not coprime, then there exists a prime number that divides both numbers. \\\pause
+        There will be atmost $15 \cdot 15 = 225$ pairs that are both divisible by $2$. So we are left with $675$ pairs\\ \pause
+        There will be atmost $10 \cdot 10 = 100$ pairs that are both divisible by $3$. So we are left with $575$ pairs \\ \pause
+        There wil be atmost $6 \cdot 6 = 36$ pairs that are both divisible by $5$. So we are left with $539$ pairs \\ \pause
+        If we keep doing this for upto prime $37$, we will still have $450$ pairs. But now the prime numbers are greater than our range. 
+    \end{proof}
+\end{frame}
+
+\begin{frame}{Problem about GCD}
+	\framesubtitle{Codeforces 2043D}
+	\begin{theorem}<1->
+		The algorithm will find atleast one pair of coprime pair between $[l, l + 30)$ and $(r - 30, r]$.
+	\end{theorem}
+
+	\begin{proof}<1->
+        There are 30 numbers on the left side atmost. And each number has to be included in the pair. So one number has to be divisible by more than 15 prime numbers.  \pause
+        But that would mean, that number is greater than $10^{18}$. So there won't be any such number. \\ \pause 
+        Hence, there will be at least one pair of coprime numbers. \\
+    \end{proof}
+\end{frame}
+
+\begin{frame}{Problem about GCD}
+	\framesubtitle{Codeforces 2043D}
+	\textbf{If $G \neq 1$} \\
+	\begin{itemize}
+        \item <1-> We can solve the problem for $\ceil{\frac{l}{G}}$ and $\floor{\frac{r}{G}}$ then multiply the answer by $G$.
+	\end{itemize}
 \end{frame}
