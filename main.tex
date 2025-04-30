@@ -259,6 +259,57 @@ First of all, we can find all the primes upto $10^7$ using sieve. Let's say we'v
   \end{itemize}
 \end{frame}
 
+\section{Modular Arithmetic}
+\begin{frame}[fragile]{Modular Arithmetic}
+  \begin{enumerate}
+    \item $(a + b) \pmod m \equiv (a \mod m + b \mod m) \mod m$ 
+    \item $(a - b) \pmod m \equiv (a \mod m - b \mod m) \mod m$
+    \item $(a \cdot b) \pmod m \equiv (a \mod m \cdot b \mod m) \mod m$
+    \item $a^b \pmod m \equiv (a \mod m)^b \mod m$
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Modular Exponension}
+  \begin{itemize}
+    \item<1-> $a^b \pmod m$ can be computed in $\mathcal{O}(\log(b))$ time.
+    \item<2-> Code:
+        \begin{minted}{cpp}
+          int mod_exp(int a, int b, int m){
+            int res = 1;
+            while (b > 0){
+              if (b & 1)res = (res * a) % m;
+              a = (a * a) % m;
+              b >>= 1;
+            }
+            return res;
+          }
+        \end{minted}
+  \end{itemize}
+\end{frame}
+\begin{frame}[fragile]{Mod Inverse}
+  \begin{itemize}
+    \item<1-> $a^{-1} \pmod m$ can be computed in $\mathcal{O}(\log(m))$ time.
+    \item<2-> Code:
+        \begin{minted}{cpp}
+          int mod_inv(int a, int m){
+            return mod_exp(a, m - 2, m);
+          }
+        \end{minted}
+  \end{itemize}
+\end{frame}
+\begin{frame}[fragile]{NCR}
+  \begin{itemize}
+    \item<1-> $C(n, r) = \frac{n!}{r!(n - r)!}$
+    \item<2-> $C(n, r) \pmod m$ can be computed in $\mathcal{O}(n)$ time.
+    \item<3-> Code:
+        \begin{minted}{cpp}
+          int ncr(int n, int r, int m){
+            if (r > n)return 0;
+            return (fact[n] * mod_inv(fact[r], m) % m * mod_inv(fact[n - r], m) % m) % m;
+          }
+        \end{minted}
+  \end{itemize}
+\end{frame}
 
 \input{mub.tex}
 
