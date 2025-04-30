@@ -544,6 +544,9 @@ INPUT ./aux/_minted/041B8B129F24F1F7446301BC5841839C.highlight.minted
 INPUT aux/_minted/041B8B129F24F1F7446301BC5841839C.highlight.minted
 INPUT /usr/local/texlive/2024basic/texmf-dist/fonts/tfm/public/cm/cmssi10.tfm
 INPUT /usr/local/texlive/2024basic/texmf-dist/fonts/tfm/public/cm/cmss9.tfm
+INPUT ./mub.tex
+INPUT ./mub.tex
+INPUT mub.tex
 INPUT /usr/local/texlive/2024basic/texmf-dist/fonts/tfm/public/cm/cmss12.tfm
 OUTPUT aux/main.nav
 OUTPUT aux/main.toc
